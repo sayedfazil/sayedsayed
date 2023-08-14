@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web for test</title>
+  <link rel="stylesheet" href="/dist/output.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+</head>
+
+<body x-data="setup()" :class="{ 'dark': isDark }" class="bg-gray-200 dark:bg-black">
+  <style>
+    .dark .dark\:divide-gray-700> :not([hidden])~ :not([hidden]) {
+      border-color: rgba(55, 65, 81);
+    }
+
+    .dark .dark\:bg-gray-50 {
+      background-color: rgba(249, 250, 251);
+    }
+
+    .dark .dark\:bg-gray-100 {
+      background-color: rgba(243, 244, 246);
+    }
+
+    .dark .dark\:bg-gray-600 {
+      background-color: rgba(75, 85, 99);
+    }
+
+    .dark .dark\:bg-gray-700 {
+      background-color: rgba(55, 65, 81);
+    }
+
+    .dark .dark\:bg-gray-900 {
+      background-color: rgba(17, 24, 39);
+    }
+
+    .dark .dark\:bg-black {
+      background-color: rgb(0, 0, 0);
+    }
+
+    .dark .dark\:bg-red-700 {
+      background-color: rgba(185, 28, 28);
+    }
+
+    .dark .dark\:bg-green-700 {
+      background-color: rgba(4, 120, 87);
+    }
+
+    .dark .dark\:bg-indigo-800 {
+      background-color: rgb(55, 48, 163);
+    }
+
+    .dark .dark\:hover\:bg-gray-200:hover {
+      background-color: rgba(229, 231, 235);
+    }
+
+    .dark .dark\:hover\:bg-gray-600:hover {
+      background-color: rgba(75, 85, 99);
+    }
+
+    .dark .dark\:hover\:bg-gray-700:hover {
+      background-color: rgba(55, 65, 81);
+    }
+
+    .dark .dark\:hover\:bg-gray-900:hover {
+      background-color: rgba(17, 24, 39);
+    }
+
+    .dark .dark\:border-gray-100 {
+      border-color: rgba(243, 244, 246);
+    }
+
+    .dark .dark\:border-gray-400 {
+      border-color: rgba(156, 163, 175);
+    }
+
+    .dark .dark\:border-gray-500 {
+      border-color: rgba(107, 114, 128);
+    }
+
+    .dark .dark\:border-gray-600 {
+      border-color: rgba(75, 85, 99);
+    }
+
+    .dark .dark\:border-gray-700 {
+      border-color: rgba(55, 65, 81);
+    }
+
+    .dark .dark\:border-gray-900 {
+      border-color: rgb(0, 0, 0);
+    }
+
+    .dark .dark\:border-black {
+      border-color: rgb(0, 0, 0);
+    }
+
+    .dark .dark\:hover\:border-gray-800:hover {
+      border-color: rgba(31, 41, 55);
+    }
+
+    .dark .dark\:text-white {
+      color: rgba(255, 255, 255);
+    }
+
+    .dark .dark\:text-gray-50 {
+      color: rgba(249, 250, 251);
+    }
+
+    .dark .dark\:text-gray-100 {
+      color: rgba(243, 244, 246);
+    }
+
+    .dark .dark\:text-gray-200 {
+      color: rgba(229, 231, 235);
+    }
+
+    .dark .dark\:text-gray-400 {
+      color: rgba(156, 163, 175);
+    }
+
+    .dark .dark\:text-blue-700 {
+      color: rgb(25, 118, 210);
+    }
+
+    .dark .dark\:text-gray-500 {
+      color: rgba(107, 114, 128);
+    }
+
+    .dark .dark\:text-gray-700 {
+      color: rgba(55, 65, 81);
+    }
+
+    .dark .dark\:text-gray-800 {
+      color: rgba(31, 41, 55);
+    }
+
+    .dark .dark\:text-black {
+      color: rgb(0, 0, 0);
+    }
+
+    .dark .dark\:text-red-100 {
+      color: rgba(254, 226, 226);
+    }
+
+    .dark .dark\:text-green-100 {
+      color: rgba(209, 250, 229);
+    }
+
+    .dark .dark\:text-blue-400 {
+      color: rgba(96, 165, 250);
+    }
+
+    .dark .group:hover .dark\:group-hover\:text-gray-500 {
+      color: rgba(107, 114, 128);
+    }
+
+    .dark .group:focus .dark\:group-focus\:text-gray-700 {
+      color: rgba(55, 65, 81);
+    }
+
+    .dark .dark\:hover\:text-gray-100:hover {
+      color: rgba(243, 244, 246);
+    }
+
+    .dark .dark\:hover\:text-blue-500:hover {
+      color: rgba(59, 130, 246);
+    }
+  </style>
+  <div
+    class="flex flex-col flex-auto flex-shrink-0 min-h-screen antialiased text-black bg-white dark:bg-black dark:text-white">
+    <div class="flex justify-between items-center h-14 bg-[#002444] dark:bg-black">
+      <div class="flex pl-4 dark:rounded-t-md">
+        <img src="/2.jpg" alt="" class="hidden w-12 h-12 rounded-full md:block">
+        <p class="hidden mt-3 ml-3 text-white md:block">Fazil</p>
+      </div>
+      <div class="flex items-center w-full max-w-xl p-2 mr-4 bg-white border border-gray-200 rounded shadow-sm">
+        <button class="outline-none focus:outline-none">
+          <svg class="w-5 h-5 text-gray-600 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+        <input type="search" name="" id="" placeholder="Search"
+          class="w-full text-sm text-black bg-transparent outline-none focus:outline-none" />
+      </div>
+      <ul class="flex items-center">
+        <li>
+          <button aria-hidden="true" @click="toggleTheme"
+            class="p-2 text-gray-900 transition-colors duration-200 bg-blue-200 rounded-full shadow-md group hover:bg-blue-200 dark:bg-gray-50 dark:hover:bg-gray-200 focus:outline-none">
+            <svg x-show="isDark" width="24" height="24"
+              class="text-gray-700 fill-current group-hover:text-gray-500 group-focus:text-gray-700 dark:text-gray-700 dark:group-hover:text-gray-500 dark:group-focus:text-gray-700"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+            <svg x-show="!isDark" width="24" height="24"
+              class="text-gray-700 fill-current group-hover:text-gray-500 group-focus:text-gray-700 dark:text-gray-700 dark:group-hover:text-gray-500 dark:group-focus:text-gray-700"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+        </li>
+        <li>
+          <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>
+        </li>
+        <li>
+          <a href="#" class="flex items-center mr-8 hover:text-blue-100">
+            <span class="inline-flex mr-1">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                </path>
+              </svg>
+            </span>
+            <span class="text-white">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+
+    <div class="h-full bg-gray-200 dark:bg-black">
+      <div class="pb-8 bg-white rounded-lg shadow-xl dark:bg-black">
+        <div x-data="{ openSettings: false }" class="absolute right-[1%] mt-2 rounded">
+          <button @click="openSettings = !openSettings"
+            class="p-2 text-gray-300 bg-gray-100 border border-gray-400 rounded hover:text-gray-300 bg-opacity-10 hover:bg-opacity-20"
+            title="Settings">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z">
+              </path>
+            </svg>
+          </button>
+          <div x-show="openSettings" @click.away="openSettings = false"
+            class="absolute right-0 w-40 py-2 mt-1 bg-white shadow-2xl dark:bg-black" style="display: none;">
+            <div class="py-2 border-b">
+              <p class="px-6 mb-1 text-xs text-gray-400 uppercase dark:text-white">Settings</p>
+              <button class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z">
+                  </path>
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-white">Share Profile</span>
+              </button>
+              <button class="w-full flex items-center py-1.5 px-6 space-x-2 hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636">
+                  </path>
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-white">Block User</span>
+              </button>
+              <button class="w-full flex items-center py-1.5 px-6 space-x-2 hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-white">More Info</span>
+              </button>
+            </div>
+            <div class="py-2">
+              <p class="px-6 mb-1 text-xs text-gray-400 uppercase dark:text-white">Feedback</p>
+              <button class="w-full flex items-center py-1.5 px-6 space-x-2 hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                  </path>
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-white">Report</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="w-full h-[250px]">
+          <img src="/1.jpg" class="w-full h-full">
+        </div>
+        <div class="flex flex-col items-center -mt-20 bg-white dark:bg-black">
+          <img src="/2.jpg" class="w-40 border-4 border-white rounded-full">
+          <div class="flex items-center mt-2 space-x-2">
+            <p class="text-2xl"><span>Sayed</span> <span class="text-red-600">Fazil</span> <span
+                class="text-green-600">Mohabbat</span></p>
+            <span class="p-1 bg-blue-500 rounded-full" title="Verified">
+              <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </span>
+          </div>
+          <p class="text-gray-700 dark:text-white">I'm not Senior Software Engineer at Tailwind CSS</p>
+          <p class="text-sm text-gray-500">Kabul, Afghanestan</p>
+        </div>
+        <div class="flex flex-col items-center justify-end flex-1 px-8 mt-2 lg:items-end dark:bg-black">
+          <div class="flex items-center mt-2 space-x-4">
+            <button
+              class="flex items-center px-4 py-2 space-x-2 text-sm text-gray-100 transition duration-100 bg-blue-600 rounded hover:bg-blue-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                </path>
+              </svg>
+              <span>Connect</span>
+            </button>
+            <button
+              class="flex items-center px-4 py-2 space-x-2 text-sm text-gray-100 transition duration-100 bg-blue-600 rounded hover:bg-blue-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span>Message</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="flex flex-col my-4 space-y-4 2xl:flex-row 2xl:space-y-0 2xl:space-x-4 dark:bg-black">
+        <div class="flex flex-col w-full 2xl:w-1/3 dark:bg-black">
+          <div class="flex-1 p-8 bg-white rounded-lg shadow-xl dark:bg-black">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Personal Info</h4>
+            <ul class="mt-2 text-gray-700">
+              <li class="flex py-2 border-y">
+                <span class="w-24 font-bold dark:text-white">Full name:</span>
+                <span class="text-gray-700 dark:text-white">Sayed Fazil</span>
+              </li>
+              <li class="flex py-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Birthday:</span>
+                <span class="text-gray-700 dark:text-white">11 sawer, 1386</span>
+              </li>
+              <li class="flex py-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Joined:</span>
+                <span class="text-gray-700 dark:text-white">20 Asad 1402 (Today)</span>
+              </li>
+              <li class="flex py-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Mobile:</span>
+                <span class="text-gray-700 dark:text-white">+93784686037</span>
+              </li>
+              <li class="flex py-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Email:</span>
+                <span class="text-gray-700 dark:text-white">sayewdfazilmohabbat@gmail.com</span>
+              </li>
+              <li class="flex py-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Location:</span>
+                <span class="text-gray-700 dark:text-white">AFG, Kabul, Afshar, after saramiasht offec</span>
+              </li>
+              <li class="flex py-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Languages:</span>
+                <span class="text-gray-700 dark:text-white">English and Perzisch</span>
+              </li>
+              <li class="flex items-center py-2 space-x-2 border-b">
+                <span class="w-24 font-bold dark:text-white">Elsewhere:</span>
+                <a href="#" title="Facebook">
+                  <svg class="w-5 h-5" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 506.86 506.86">
+                    <defs>
+                      <style>
+                        .cls-1 {
+                          fill: #1877f2;
+                        }
+
+                        .cls-2 {
+                          fill: #fff;
+                        }
+                      </style>
+                    </defs>
+                    <path class="cls-1"
+                      d="M506.86,253.43C506.86,113.46,393.39,0,253.43,0S0,113.46,0,253.43C0,379.92,92.68,484.77,213.83,503.78V326.69H149.48V253.43h64.35V197.6c0-63.52,37.84-98.6,95.72-98.6,27.73,0,56.73,5,56.73,5v62.36H334.33c-31.49,0-41.3,19.54-41.3,39.58v47.54h70.28l-11.23,73.26H293V503.78C414.18,484.77,506.86,379.92,506.86,253.43Z">
+                    </path>
+                    <path class="cls-2"
+                      d="M352.08,326.69l11.23-73.26H293V205.89c0-20,9.81-39.58,41.3-39.58h31.95V104s-29-5-56.73-5c-57.88,0-95.72,35.08-95.72,98.6v55.83H149.48v73.26h64.35V503.78a256.11,256.11,0,0,0,79.2,0V326.69Z">
+                    </path>
+                  </svg>
+                </a>
+                <a href="#" title="Twitter">
+                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333"
+                    shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                    image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+                    <path
+                      d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm90493 110539c-6654 2976-13822 4953-21307 5835 7669-4593 13533-11870 16333-20535-7168 4239-15133 7348-23574 9011-6787-7211-16426-11694-27105-11694-20504 0-37104 16610-37104 37101 0 2893 320 5722 949 8450-30852-1564-58204-16333-76513-38806-3285 5666-5022 12109-5022 18661v4c0 12866 6532 24246 16500 30882-6083-180-11804-1876-16828-4626v464c0 17993 12789 33007 29783 36400-3113 845-6400 1313-9786 1313-2398 0-4709-247-7007-665 4746 14736 18448 25478 34673 25791-12722 9967-28700 15902-46120 15902-3006 0-5935-184-8860-534 16466 10565 35972 16684 56928 16684 68271 0 105636-56577 105636-105632 0-1630-36-3209-104-4806 7251-5187 13538-11733 18514-19185l17-17-3 2z"
+                      fill="#1da1f2"></path>
+                  </svg>
+                </a>
+                <a href="#" title="LinkedIn">
+                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333"
+                    shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                    image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+                    <path
+                      d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z"
+                      fill="#0077b5"></path>
+                  </svg>
+                </a>
+                <a href="#" title="Github">
+                  <svg class="w-5 h-5 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+                    shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                    image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 640 640">
+                    <path
+                      d="M319.988 7.973C143.293 7.973 0 151.242 0 327.96c0 141.392 91.678 261.298 218.826 303.63 16.004 2.964 21.886-6.957 21.886-15.414 0-7.63-.319-32.835-.449-59.552-89.032 19.359-107.8-37.772-107.8-37.772-14.552-36.993-35.529-46.831-35.529-46.831-29.032-19.879 2.209-19.442 2.209-19.442 32.126 2.245 49.04 32.954 49.04 32.954 28.56 48.922 74.883 34.76 93.131 26.598 2.882-20.681 11.15-34.807 20.315-42.803-71.08-8.067-145.797-35.516-145.797-158.14 0-34.926 12.52-63.485 32.965-85.88-3.33-8.078-14.291-40.606 3.083-84.674 0 0 26.87-8.61 88.029 32.8 25.512-7.075 52.878-10.642 80.056-10.76 27.2.118 54.614 3.673 80.162 10.76 61.076-41.386 87.922-32.8 87.922-32.8 17.398 44.08 6.485 76.631 3.154 84.675 20.516 22.394 32.93 50.953 32.93 85.879 0 122.907-74.883 149.93-146.117 157.856 11.481 9.921 21.733 29.398 21.733 59.233 0 42.792-.366 77.28-.366 87.804 0 8.516 5.764 18.473 21.992 15.354 127.076-42.354 218.637-162.274 218.637-303.582 0-176.695-143.269-319.988-320-319.988l-.023.107z">
+                    </path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex-1 p-8 mt-4 bg-white rounded-lg shadow-xl dark:bg-black">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Activity log</h4>
+            <div class="relative px-4">
+              <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+              <div class="flex items-center w-full my-6 -ml-1.5">
+                <div class="z-10 w-1/12">
+                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="w-11/12">
+                  <p class="text-sm">Profile informations changed.</p>
+                  <p class="text-xs text-gray-500">3 min ago</p>
+                </div>
+              </div>
+              <div class="flex items-center w-full my-6 -ml-1.5">
+                <div class="z-10 w-1/12">
+                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="w-11/12">
+                  <p class="text-sm">
+                    Connected with <a href="#" class="font-bold text-blue-600">Colby Covington</a>.</p>
+                  <p class="text-xs text-gray-500">15 min ago</p>
+                </div>
+              </div>
+              <div class="flex items-center w-full my-6 -ml-1.5">
+                <div class="z-10 w-1/12">
+                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="w-11/12">
+                  <p class="text-sm">Invoice <a href="#" class="font-bold text-blue-600">#4563</a> was created.</p>
+                  <p class="text-xs text-gray-500">57 min ago</p>
+                </div>
+              </div>
+              <div class="flex items-center w-full my-6 -ml-1.5">
+                <div class="z-10 w-1/12">
+                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="w-11/12">
+                  <p class="text-sm">
+                    Message received from <a href="#" class="font-bold text-blue-600">Cecilia Hendric</a>.</p>
+                  <p class="text-xs text-gray-500">1 hour ago</p>
+                </div>
+              </div>
+              <div class="flex items-center w-full my-6 -ml-1.5">
+                <div class="z-10 w-1/12">
+                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="w-11/12">
+                  <p class="text-sm">New order received <a href="#" class="font-bold text-blue-600">#OR9653</a>.</p>
+                  <p class="text-xs text-gray-500">2 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-center w-full my-6 -ml-1.5">
+                <div class="z-10 w-1/12">
+                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="w-11/12">
+                  <p class="text-sm">
+                    Message received from <a href="#" class="font-bold text-blue-600">Jane Stillman</a>.</p>
+                  <p class="text-xs text-gray-500">2 hours ago</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col w-full 2xl:w-2/3">
+          <div class="flex-1 p-8 bg-white rounded-lg shadow-xl dark:bg-black">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white">About</h4>
+            <p class="mt-2 text-gray-700 dark:text-white">Hi Evreyone I'm Sayed Fazil Mohabbaat you'r Porgram Language
+              Teacher Today We
+              Lerning Tailwnidcss </p>
+          </div>
+          <div class="flex-1 p-8 mt-4 text-white bg-white rounded-lg shadow-xl dark:bg-black">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Statistics</h4>
+
+            <div class="grid grid-cols-1 gap-8 mt-4 lg:grid-cols-3">
+              <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl dark:bg-black">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-bold text-indigo-600 dark:text-white">Total Revenue</span>
+                  <span
+                    class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default hover:bg-gray-500 hover:text-gray-200">7
+                    days</span>
+                </div>
+                <div class="flex items-center justify-between mt-6">
+                  <div>
+                    <svg
+                      class="w-12 h-12 p-2.5 bg-indigo-400 bg-opacity-20 rounded-full text-indigo-600 border border-indigo-600"
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                      </path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-end">
+                      <span class="text-2xl font-bold text-black 2xl:text-3xl dark:text-white">$8,141</span>
+                      <div class="flex items-center mb-1 ml-2">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span class="font-bold text-sm text-gray-500 ml-0.5">3%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl dark:bg-black">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-bold text-green-600">New Orders</span>
+                  <span
+                    class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default hover:bg-gray-500 hover:text-gray-200">7
+                    days</span>
+                </div>
+                <div class="flex items-center justify-between mt-6 dark:bg-black">
+                  <div>
+                    <svg
+                      class="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600"
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-end">
+                      <span class="text-2xl font-bold text-black 2xl:text-3xl dark:text-white">217</span>
+                      <div class="flex items-center mb-1 ml-2">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span class="font-bold text-sm text-gray-500 ml-0.5">5%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl dark:bg-black">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-bold text-blue-600">New Connections</span>
+                  <span
+                    class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default hover:bg-gray-500 hover:text-gray-200">7
+                    days</span>
+                </div>
+                <div class="flex items-center justify-between mt-6">
+                  <div>
+                    <svg
+                      class="w-12 h-12 p-2.5 bg-blue-400 bg-opacity-20 rounded-full text-blue-600 border border-blue-600"
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-end">
+                      <span class="text-2xl font-bold text-black 2xl:text-3xl dark:text-white">54</span>
+                      <div class="flex items-center mb-1 ml-2">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span class="font-bold text-sm text-gray-500 ml-0.5">7%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden mt-4 sm:block dark:text-white">
+              <canvas class="dark:text-white" id="verticalBarChart"
+                style="box-sizing: border-box; height: 414px; width: 828px;" width="1656" height="828"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="p-8 bg-white rounded-lg shadow-xl dark:bg-black">
+        <div class="flex items-center justify-between">
+          <h4 class="text-xl font-bold text-gray-900 dark:text-white">Connections (532)</h4>
+          <a href="#" title="View All">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 hover:text-gray-700" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+              </path>
+            </svg>
+          </a>
+        </div>
+        <div
+          class="grid grid-cols-2 gap-8 mt-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 dark:bg-black dark:text-white">
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+          <a href="#"
+            class="flex flex-col items-center justify-center text-gray-800 hover:text-blue-600 dark:text-white"
+            title="View Profile">
+            <img src="/2.jpg" class="w-16 rounded-full">
+            <p class="mt-1 text-sm font-bold text-center">Fazil Mohabbat</p>
+            <p class="text-xs text-center text-gray-500">Senior Tailwindcss</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section class="p-5 my-16 text-center ">
+      <h1 class="text-4xl text-bold">How Can We Help You Today</h1>
+      <div class="grid grid-cols-1 gap-5 px-3 md:grid-cols-2 lg:grid-cols-4 mt-7"><a target="_blank" class="group"
+          href="/">
+          <div class="transition-all cursor-pointer group-hover:scale-90 group-active:scale-100">
+            <div class="relative flex items-center justify-center w-full h-52"><img alt="alternative text"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" src="/11.jpg" decoding="async"
+                data-nimg="fill" class="object-contain w-full h-auto" loading="lazy"
+                style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"></div>
+          </div>
+          <div class="my-3">
+            <h3 class="mb-3 text-xl font-medium">Free Tech Support</h3>
+            <p class="hidden text-sm md:block">Helping you build your ideal work and lifestyle</p>
+          </div>
+          <div class="flex items-center justify-center gap-2 mt-2 text-blue-600 transition-all group-hover:underline">
+            Ask Technical Experts<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              aria-hidden="true" width="20" height="20">
+              <path fill-rule="evenodd"
+                d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z"
+                clip-rule="evenodd"></path>
+              <path fill-rule="evenodd"
+                d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z"
+                clip-rule="evenodd"></path>
+            </svg></div>
+        </a><a target="_blank" class="group" href="/">
+          <div class="transition-all cursor-pointer group-hover:scale-90 group-active:scale-100">
+            <div class="relative flex items-center justify-center w-full h-52"><img alt="alternative text"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" src="/12.jpg" decoding="async"
+                data-nimg="fill" class="object-contain w-full h-auto" loading="lazy"
+                style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"></div>
+          </div>
+          <div class="my-3">
+            <h3 class="mb-3 text-xl font-medium">Grow with Us</h3>
+            <p class="hidden text-sm md:block">Be our partner, to join a community designed to foster your business.</p>
+          </div>
+          <div class="flex items-center justify-center gap-2 mt-2 text-blue-600 transition-all group-hover:underline">
+            Start Cooperation<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              aria-hidden="true" width="20" height="20">
+              <path fill-rule="evenodd"
+                d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z"
+                clip-rule="evenodd"></path>
+              <path fill-rule="evenodd"
+                d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z"
+                clip-rule="evenodd"></path>
+            </svg></div>
+        </a><a target="_blank" class="group" href="/">
+          <div class="transition-all cursor-pointer group-hover:scale-90 group-active:scale-100">
+            <div class="relative flex items-center justify-center w-full h-52"><img alt="alternative text"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" src="/13.jpg" data-nimg="fill"
+                class="object-contain w-full h-auto" loading="lazy"
+                style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"></div>
+          </div>
+          <div class="my-3">
+            <h3 class="mb-3 text-xl font-medium">Exclusive Service</h3>
+            <p class="hidden text-sm md:block">Register to get F4 services</p>
+          </div>
+          <div class="flex items-center justify-center gap-2 mt-2 text-blue-600 transition-all group-hover:underline">
+            Create Now<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+              width="20" height="20">
+              <path fill-rule="evenodd"
+                d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z"
+                clip-rule="evenodd"></path>
+              <path fill-rule="evenodd"
+                d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z"
+                clip-rule="evenodd"></path>
+            </svg></div>
+        </a><a target="_blank" class="group" href="/">
+          <div class="transition-all cursor-pointer group-hover:scale-90 group-active:scale-100">
+            <div class="relative flex items-center justify-center w-full h-52"><img alt="alternative text"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" src="/14.jpg" decoding="async"
+                data-nimg="fill" class="object-contain w-full h-auto" loading="lazy"
+                style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"></div>
+          </div>
+          <div class="my-3">
+            <h3 class="mb-3 text-xl font-medium">Order Tracking</h3>
+            <p class="hidden text-sm md:block">Don't know the progress of your order? Check Online!</p>
+          </div>
+          <div class="flex items-center justify-center gap-2 mt-2 text-blue-600 transition-all group-hover:underline">
+            Track Your Order<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              aria-hidden="true" width="20" height="20">
+              <path fill-rule="evenodd"
+                d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z"
+                clip-rule="evenodd"></path>
+              <path fill-rule="evenodd"
+                d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z"
+                clip-rule="evenodd"></path>
+            </svg></div>
+        </a></div>
+    </section>
+
+
+
+    <section
+      class=" lg:px-8 py-12 gap-3 containerClasses sm:px-6 bg-gradient-to-r bg-gray-100 from-bg-F5D6DB to-bg-[#EDEBFF] dark:bg-gray-900 rounded-lg mt-8">
+      <div class="flex items-center justify-between mb-5">
+        <a class="pr-2 text-lg italic font-bold text-indigo-900 uppercase dark:text-indigo-500 lg:font-extrabold md:text-2xl lg:text-3xl "
+          href="/">
+          <h5>Shop By Category</h5>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 gap-8 px-2 md:grid-cols-2 lg:grid-cols-4 ">
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900">
+          <a aria-label="Promotion" class="relative flex-2" href="/search?q=Laptop&amp;categories=33">
+            <div class="relative flex items-center justify-center w-full h-64">
+              <img loading="lazy" src="/2.jpg" class="object-cover w-full h-full" alt="alternative text">
+            </div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Laptop</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li>
+                <a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Business Laptop</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Student Laptop</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Gaming Laptop</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">WorkStation Laptop</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Chromebooks</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Laptop Accessories</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Convertible 2-in-1 Laptop
+                  ( X360&nbsp;)</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Laptop&amp;categories=33">Consumer</a></li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/laptop"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Desktop&amp;categories=41">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy" src="/2.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-blue-700">Desktop</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Desktop&amp;categories=41">Gaming PC</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Desktop&amp;categories=41">WorkStation</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Desktop&amp;categories=41">Office Desk</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Desktop&amp;categories=41">All-in-One</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Desktop&amp;categories=41">Mini Portable PC</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Desktop&amp;categories=41">Desktop Accessories</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/desktop"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Network&amp;categories=48">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy" src="/2.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Network</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Wired Router</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Switch</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Firewall</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Unify Communication</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Video Surveillance</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Networking
+                  Accessories</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Access Point</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Point to point</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Network&amp;categories=48">Wireless</a></li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/network"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Servers&amp;categories=56">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7378/conversions/Server-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Servers</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Rack Servers</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Tower Servers</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Blade Servers</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Server Systems</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Server Processors</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Servers Hard Drives</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Servers&amp;categories=56">Servers Memory (RAM)</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/servers"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Apple&amp;categories=64">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7383/conversions/Apple-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Apple</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">Mac Desktop</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">MacBook</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">iPad</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">Music</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">Apple Accessories</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">Apple TV</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Apple&amp;categories=64">Monitors</a></li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/apple"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Microsoft&amp;categories=72">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7385/conversions/Microsoft-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Microsoft</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Microsoft&amp;categories=72">Surface Go</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Microsoft&amp;categories=72">Surface Laptop</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Microsoft&amp;categories=72">Surface Pro</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Microsoft&amp;categories=72">Surface Studio</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Microsoft&amp;categories=72">Surface Accessories</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/microsoft"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=PC%20Components&amp;categories=79">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7391/conversions/pc-component-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">PC Components</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">CPU /
+                  Processors</a></li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Memory (RAM)</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Graphic (GPU)</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Computer Case</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Power
+                  Supplies</a></li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Storage</a></li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Component
+                  Accessories</a></li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Custom PC
+                  Builder</a></li>
+              <li><a class="italic hover:underline" href="/search?q=PC%20Components&amp;categories=79">Motherboard</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/pc-components"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Peripherals&amp;categories=88">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy" src="/2.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Peripherals</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Monitors</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Printers</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Scanners</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Power Protection
+                  (UPS)</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Projectors</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Photocopy Machine</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Peripherals&amp;categories=88">Accessories</a></li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/peripherals"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Camera&amp;categories=96">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7412/conversions/Camera-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Camera</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Camera&amp;categories=96">Digital Camera</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Camera&amp;categories=96">Lenses</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Camera&amp;categories=96">Drones</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Camera&amp;categories=96">Film Cameras</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Camera&amp;categories=96">Camera Accessories</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/camera"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Mobile&amp;categories=102">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7417/conversions/Mobile-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Mobile</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Mobile&amp;categories=102">SmartPhones</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Mobile&amp;categories=102">Android Tablets</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Mobile&amp;categories=102">Wearable Technology</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Mobile&amp;categories=102">Mobile Accessories</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/mobile"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7425/conversions/Gaming-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Gaming &amp; VR</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">Xbox</a>
+              </li>
+              <li><a class="italic hover:underline"
+                  href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">Playstation</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">Nintendo</a>
+              </li>
+              <li><a class="italic hover:underline" href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">Digital
+                  Games</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">Virtual
+                  Reality</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Gaming%20&amp;%20VR&amp;categories=107">Game
+                  Accessories</a></li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/gaming-vr"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+        <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-900"><a
+            aria-label="Promotion" class="relative flex-2" href="/search?q=Serveries&amp;categories=114">
+            <div class="relative flex items-center justify-center w-full h-64"><img loading="lazy"
+                src="https://apiv2.exceldisc.com/media/7435/conversions/Service-Center-preview.jpg"
+                class="object-cover w-full h-full" alt="alternative text"></div>
+            <div
+              class="absolute bottom-0 border-b-[30px] border-x-[30px] border-x-transparent border-b-white dark:border-b-black w-[90%] right-4 max-sm:right-[0.5rem] text-center p-2 h-0 text-xl">
+              <h2 class="mt-5 dark:text-white max-sm:text-[15px] font-bold text-indigo-900">Serveries</h2>
+            </div>
+          </a>
+          <div class="flex flex-col h-full p-2 pb-4 md:p-6 dark:bg-black">
+            <ul class="pl-6 mt-2 mb-5 text-sm list-disc sm:text-base md:text-lg">
+              <li><a class="italic hover:underline" href="/search?q=Serveries&amp;categories=114">Online CCIE
+                  Services</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Serveries&amp;categories=114">Computer Hardware
+                  Services</a></li>
+              <li><a class="italic hover:underline" href="/search?q=Serveries&amp;categories=114">Online Help Desk</a>
+              </li>
+            </ul><a aria-label="Promotion" class="mt-auto" href="/serveries"><span
+                class="inline-block text-indigo-900 underline dark:text-white ">Explore</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <div
+      class="grid gap-4 px-6 mt-8 bg-white py-7 dark:bg-gray-900 xl:grid-cols-2 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1">
+      <img src="/5.png" alt="" class="rounded-xl">
+      <img src="/6.jpg" alt="" class="rounded-xl">
+    </div>
+
+
+
+
+    <div class="mt-8 bg-gray-100 xl:px-8 lg:px-12 md:px-3 dark:bg-gray-900 xl:py-4 lg:py-4 md:py-4 sm:py-4 sm:px-8">
+      <p class="mt-8 text-4xl italic font-bold uppercase">Frature Products</p>
+      <div
+        class="grid justify-center gap-4 xl:px-0 lg:grid-cols-2 xl:grid-cols-4 md:grid md:grid-cols-2 md:px-0 sm:grid sm:grid-cols-1 sm:px-12 sm:mt-3 sm:mb-4">
+
+        <div class="mt-5 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-10">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <div class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+                <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </div>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="bg-gray-300 lg:mt-10 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-10 sm:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-10 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0 sm:mt-3">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-10 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg sm:mt-3 md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div
+        class="grid justify-center gap-4 xl:px-0 lg:px-0 lg:grid-cols-2 xl:grid-cols-4 md:grid md:grid-cols-2 md:px-0 md:gap- sm:grid sm:grid-cols-1 sm:px-12 sm:mt-3">
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div
+        class="grid justify-center gap-4 xl:px-0 lg:px-0 lg:grid-cols-2 xl:grid-cols-4 md:grid md:grid-cols-2 md:px-0 md:gap- sm:grid sm:grid-cols-1 sm:px-12 sm:mt-3">
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div
+        class="grid justify-center gap-4 xl:px-0 lg:px-0 lg:grid-cols-2 xl:grid-cols-4 md:grid md:grid-cols-2 md:px-0 md:gap- sm:grid sm:grid-cols-1 sm:px-12 sm:mt-3">
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="xl:mt-0 lg:mt-0 bg-gray-300 dark:bg-black w-[450px] p-2 px-5 rounded-lg md:mt-0">
+          <div>
+            <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
+            <div>
+              <p class="mt-6">
+                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+              <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
+              </p>
+
+              <p class="mt-4 text-lg font-bold">
+                <span class="text-[#4f46e5]">$509.00</span>$564
+              </p>
+              <div class="flex gap-2 mt-4">
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+                <svg class="dark:text-white dark:bg-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                  viewBox="0 0 576 512">
+                  <path
+                    d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div
+      class="grid gap-6 mt-20 xl:px-8 lg:px-10 xl:grid-cols-3 lg:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 sm:px-4 md:px-8">
+      <div class="flex flex-col items-start">
+        <div class="relative p-10 mb-4 text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-gray-100">
+          <div class="absolute z-40 w-5 h-6 bottom-arrow top -bottom-4 left-5">
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+            class="w-5 h-5">
+            <path fill-rule="evenodd"
+              d="M10 2.5c-1.31 0-2.526.386-3.546 1.051a.75.75 0 01-.82-1.256A8 8 0 0118 9a22.47 22.47 0 01-1.228 7.351.75.75 0 11-1.417-.49A20.97 20.97 0 0016.5 9 6.5 6.5 0 0010 2.5zM4.333 4.416a.75.75 0 01.218 1.038A6.466 6.466 0 003.5 9a7.966 7.966 0 01-1.293 4.362.75.75 0 01-1.257-.819A6.466 6.466 0 002 9c0-1.61.476-3.11 1.295-4.365a.75.75 0 011.038-.219zM10 6.12a3 3 0 00-3.001 3.041 11.455 11.455 0 01-2.697 7.24.75.75 0 01-1.148-.965A9.957 9.957 0 005.5 9c0-.028.002-.055.004-.082a4.5 4.5 0 018.996.084V9.15l-.005.297a.75.75 0 11-1.5-.034c.003-.11.004-.219.005-.328a3 3 0 00-3-2.965zm0 2.13a.75.75 0 01.75.75c0 3.51-1.187 6.745-3.181 9.323a.75.75 0 11-1.186-.918A13.687 13.687 0 009.25 9a.75.75 0 01.75-.75zm3.529 3.698a.75.75 0 01.584.885 18.883 18.883 0 01-2.257 5.84.75.75 0 11-1.29-.764 17.386 17.386 0 002.078-5.377.75.75 0 01.885-.584z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <p class="mt-2 text-sm leading-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum. Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum.Lorem ipsum, dolor sit amet consectetur
+            adipisicing elit Lorem ipsum.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum.</p>
+        </div>
+        <div class="flex items-center">
+          <div class="w-16 h-16 mr-3">
+            <div
+              class="relative classes.imageClasses h-full w-full rounded-full overflow-hidden  flex items-center justify-center">
+              <img src="/2.jpg" alt="">
+            </div>
+          </div>
+          <div class="text-sm">
+            <span class="font-medium leading-none text-gray-900 dark:text-gray-100">Jonathan Reinink</span>
+            <p class="text-gray-600">CEO, company</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col items-start">
+        <div class="relative p-10 mb-4 text-white bg-indigo-800 rounded-lg dark:bg-indigo-800 dark:text-gray-100">
+          <div class="absolute z-40 w-5 h-6 bottom-arrow top -bottom-4 left-5">
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+            class="w-5 h-5">
+            <path fill-rule="evenodd"
+              d="M10 2.5c-1.31 0-2.526.386-3.546 1.051a.75.75 0 01-.82-1.256A8 8 0 0118 9a22.47 22.47 0 01-1.228 7.351.75.75 0 11-1.417-.49A20.97 20.97 0 0016.5 9 6.5 6.5 0 0010 2.5zM4.333 4.416a.75.75 0 01.218 1.038A6.466 6.466 0 003.5 9a7.966 7.966 0 01-1.293 4.362.75.75 0 01-1.257-.819A6.466 6.466 0 002 9c0-1.61.476-3.11 1.295-4.365a.75.75 0 011.038-.219zM10 6.12a3 3 0 00-3.001 3.041 11.455 11.455 0 01-2.697 7.24.75.75 0 01-1.148-.965A9.957 9.957 0 005.5 9c0-.028.002-.055.004-.082a4.5 4.5 0 018.996.084V9.15l-.005.297a.75.75 0 11-1.5-.034c.003-.11.004-.219.005-.328a3 3 0 00-3-2.965zm0 2.13a.75.75 0 01.75.75c0 3.51-1.187 6.745-3.181 9.323a.75.75 0 11-1.186-.918A13.687 13.687 0 009.25 9a.75.75 0 01.75-.75zm3.529 3.698a.75.75 0 01.584.885 18.883 18.883 0 01-2.257 5.84.75.75 0 11-1.29-.764 17.386 17.386 0 002.078-5.377.75.75 0 01.885-.584z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <p class="mt-2 text-sm leading-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum. Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum.Lorem ipsum, dolor sit amet consectetur
+            adipisicing elit Lorem ipsum.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum.</p>
+        </div>
+        <div class="flex items-center">
+          <div class="w-16 h-16 mr-3">
+            <div
+              class="relative classes.imageClasses h-full w-full rounded-full overflow-hidden  flex items-center justify-center">
+              <img src="/2.jpg" alt="">
+            </div>
+          </div>
+          <div class="text-sm"><span class="font-medium leading-none text-gray-900 dark:text-gray-100">Jonathan
+              Reinink</span>
+            <p class="text-gray-600">CEO, company</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col items-start">
+        <div class="relative p-10 mb-4 text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-gray-100">
+          <div class="absolute z-40 w-5 h-6 bottom-arrow top -bottom-4 left-5">
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+            class="w-5 h-5">
+            <path fill-rule="evenodd"
+              d="M10 2.5c-1.31 0-2.526.386-3.546 1.051a.75.75 0 01-.82-1.256A8 8 0 0118 9a22.47 22.47 0 01-1.228 7.351.75.75 0 11-1.417-.49A20.97 20.97 0 0016.5 9 6.5 6.5 0 0010 2.5zM4.333 4.416a.75.75 0 01.218 1.038A6.466 6.466 0 003.5 9a7.966 7.966 0 01-1.293 4.362.75.75 0 01-1.257-.819A6.466 6.466 0 002 9c0-1.61.476-3.11 1.295-4.365a.75.75 0 011.038-.219zM10 6.12a3 3 0 00-3.001 3.041 11.455 11.455 0 01-2.697 7.24.75.75 0 01-1.148-.965A9.957 9.957 0 005.5 9c0-.028.002-.055.004-.082a4.5 4.5 0 018.996.084V9.15l-.005.297a.75.75 0 11-1.5-.034c.003-.11.004-.219.005-.328a3 3 0 00-3-2.965zm0 2.13a.75.75 0 01.75.75c0 3.51-1.187 6.745-3.181 9.323a.75.75 0 11-1.186-.918A13.687 13.687 0 009.25 9a.75.75 0 01.75-.75zm3.529 3.698a.75.75 0 01.584.885 18.883 18.883 0 01-2.257 5.84.75.75 0 11-1.29-.764 17.386 17.386 0 002.078-5.377.75.75 0 01.885-.584z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <p class="mt-2 text-sm leading-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum. Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum.Lorem ipsum, dolor sit amet consectetur
+            adipisicing elit Lorem ipsum.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit Lorem ipsum.</p>
+        </div>
+        <div class="flex items-center">
+          <div class="w-16 h-16 mr-3">
+            <div
+              class="relative classes.imageClasses h-full w-full rounded-full overflow-hidden  flex items-center justify-center">
+              <img src="/2.jpg" alt="">
+            </div>
+          </div>
+          <div class="text-sm"><span class="font-medium leading-none text-gray-900 dark:text-gray-100">Jonathan
+              Reinink</span>
+            <p class="text-gray-600">CEO, company</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section class="w-full px-8 mx-auto my-16 ">
+      <div class="flex items-center gap-2 mb-5">
+        <a disable="false" class="mr-2 text-lg font-bold text-indigo-900 dark:text-gray-200 md:text-2xl "
+          href="/">Blogs</a>
+        <div class="relative h-px bg-indigo-900 grow top-2">
+        </div>
+        <a class="font-bold" href="/">See All</a>
+      </div>
+      <div class="grid items-stretch grid-cols-1 gap-2 olClasses md:grid-cols-2 md:gap-5">
+        <div class="col-span-1"><a aria-label="Promotion intel-processor-letter-meanings-update"
+            class="flex flex-col gap-2 overflow-hidden rounded-lg ImageBlog"
+            href="/blog/intel-processor-letter-meanings-update">
+            <div class="w-full h-64 flex-0 lg:h-96">
+              <div class="relative flex items-center justify-center w-full h-full">
+                <img alt="alternative text" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                  src="/7.jpg" decoding="async" data-nimg="fill" class="object-cover w-full h-auto" loading="lazy"
+                  style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent">
+              </div>
+            </div>
+            <div class="flex flex-col items-start justify-between gap-2 pb-3 border-b-2 border-gray-200">
+              <h3 class="text-base font-semibold line-clamp-2 hover:underline">Intel Processor Letter Meanings 2023</h3>
+              <p class="text-base text-gray-500 line-clamp-2 dark:text-gray-200">When choosing an Intel processor, it's
+                important to consider the tasks you'll be using it for. If you're a casual user who only needs a
+                computer for basic tasks, the entry-level options such as Celeron and Pentium are suitable. If you're a
+                gamer or a video editor, you'll want to choose one of the higher-end options such as i7 or i9. The Xeon
+                processors are designed for servers and workstations, so they're not necessary for the average user.
+              </p>
+              <div class="flex items-center justify-between w-full gap-3 text-sm text-gray-600 dark:text-gray-400">
+                <span>ExcelDisc Info</span><span>Jul 08, 2023</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="flex flex-col justify-between col-span-1 gap-2">
+          <a aria-label="Promotion" class="HorImageBlog" href="/promotion-url">
+            <div class="flex flex-col items-start justify-between gap-2 pb-3 border-b-2 border-gray-200">
+              <h3 class="text-base font-semibold line-clamp-2 hover:underline">How to Drive Attendees to Your Next Event
+                (Literally!), According to Uber for Business' Marketing Director</h3>
+              <p class="text-sm text-gray-500 line-clamp-2 dark:text-gray-200">Here are some tips, tools, and
+                professional advice on how to be an excellent Instagram man...</p>
+              <div class="flex items-center justify-between w-full gap-3 text-sm text-gray-600 dark:text-gray-400">
+                <span>Sophia Bezzarni</span><span>4/21/22</span>
+              </div>
+            </div>
+          </a>
+          <a aria-label="Promotion" class="HorImageBlog" href="/promotion-url">
+            <div class="flex flex-col items-start justify-between gap-2 pb-3 border-b-2 border-gray-200">
+              <h3 class="text-base font-semibold line-clamp-2 hover:underline">How to Drive Attendees to Your Next Event
+                (Literally!), According to Uber for Business' Marketing Director</h3>
+              <p class="text-sm text-gray-500 line-clamp-2 dark:text-gray-200">Here are some tips, tools, and
+                professional advice on how to be an excellent Instagram man...</p>
+              <div class="flex items-center justify-between w-full gap-3 text-sm text-gray-600 dark:text-gray-400">
+                <span>Sophia Bezzarni</span><span>4/21/22</span>
+              </div>
+            </div>
+          </a>
+          <a aria-label="Promotion" class="HorImageBlog" href="/promotion-url">
+            <div class="flex flex-col items-start justify-between gap-2 pb-3 border-b-2 border-gray-200">
+              <h3 class="text-base font-semibold line-clamp-2 hover:underline">How to Drive Attendees to Your Next Event
+                (Literally!), According to Uber for Business' Marketing Director</h3>
+              <p class="text-sm text-gray-500 line-clamp-2 dark:text-gray-200">Here are some tips, tools, and
+                professional advice on how to be an excellent Instagram man...</p>
+              <div class="flex items-center justify-between w-full gap-3 text-sm text-gray-600 dark:text-gray-400">
+                <span>Sophia Bezzarni</span><span>4/21/22</span>
+              </div>
+            </div>
+          </a>
+          <a aria-label="Promotion" class="HorImageBlog" href="/promotion-url">
+            <div class="flex flex-col items-start justify-between gap-2 pb-3 border-b-2 border-gray-200">
+              <h3 class="text-base font-semibold line-clamp-2 hover:underline">How to Drive Attendees to Your Next Event
+                (Literally!), According to Uber for Business' Marketing Director</h3>
+              <p class="text-sm text-gray-500 line-clamp-2 dark:text-gray-200">Here are some tips, tools, and
+                professional advice on how to be an excellent Instagram man...</p>
+              <div class="flex items-center justify-between w-full gap-3 text-sm text-gray-600 dark:text-gray-400">
+                <span>Sophia Bezzarni</span><span>4/21/22</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <div
+      class="grid items-stretch grid-cols-1 gap-2 md:gap-4 olClasses xl:px-8 lg:px-4 md:px-4 sm:px-8 lg:grid-cols-2 lg:gap-5">
+      <div class="relative flex col-span-1 gap-2 p-3 rounded-lg bg-indigo-50 dark:bg-gray-700 lg:p-5">
+        <div class="z-10 w-full md:w-8/12">
+          <h4 class="mb-5 text-sm italic font-extrabold uppercase md:text-lg">DEALS JUST FOR YOU</h4>
+          <p class="font-bold">Sign up to receive exclusive offers in your inbox.</p>
+          <form class="relative flex mt-2 mb-5 rounded-md" siq_id="autopick_4342">
+            <span class="absolute inline-flex items-center left-2 bottom-[0.55rem] dark:text-black">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                class="w-5 h-5 dark:text-black dark:bg-white">
+                <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"></path>
+                <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z">
+                </path>
+              </svg>
+            </span>
+            <input type="email" name="company-website" id="company-website"
+              class="flex-1 block w-full p-2 border border-r-0 border-gray-300 rounded-md rounded-r-none rounded-br-none pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:text-black"
+              placeholder="Enter your email address" value="">
+            <button
+              class="inline-flex items-center px-3 text-sm font-bold text-white uppercase bg-indigo-700 cursor-pointer hover:bg-indigo-800 rounded-r-md">Subscribtion</button>
+          </form>
+        </div>
+        <div class="absolute top-0 right-0 z-0 w-4/12 h-full">
+          <div class="relative classes.imageClasses h-full w-full mt-6  flex items-center justify-center">
+            <img alt="Category Image" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" src="/8.png"
+              decoding="async" data-nimg="fill" class="object-contain w-full h-auto" loading="lazy"
+              style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent">
+          </div>
+        </div>
+      </div>
+      <div class="relative flex col-span-1 gap-2 p-3 rounded-lg bg-indigo-50 dark:bg-gray-700 lg:p-5">
+        <div class="z-10 w-full md:w-8/12">
+          <h4 class="mb-5 text-sm italic font-extrabold uppercase md:text-lg">Join for Delay Offers</h4>
+          <p class="font-bold">Enter your phone number we will send you WhatsApp group link</p>
+          <form class="relative flex mt-2 mb-5 rounded-md" siq_id="autopick_7116">
+            <span class="absolute inline-flex items-center left-2 bottom-[0.55rem] bg-white dark:bg-zinc-800 ">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                class="w-5 h-5 dark:text-black dark:bg-white">
+                <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"></path>
+                <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z">
+                </path>
+              </svg>
+            </span>
+            <input name="phone" id="phone"
+              class="flex-1 block w-full p-2 border border-r-0 border-gray-300 rounded-md rounded-r-none rounded-br-none pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:text-black"
+              type="tel" placeholder="+971" value="">
+            <button
+              class="inline-flex items-center px-3 text-sm font-bold text-white uppercase bg-indigo-700 cursor-pointer hover:bg-indigo-800 rounded-r-md">Send
+              link</button>
+          </form>
+        </div>
+        <div class="absolute top-0 right-0 z-0 w-4/12 h-full">
+          <div
+            class="relative classes.imageClasses lg:h-[90%] h-[80%] w-[100%] mt-10  flex items-center justify-center">
+            <img alt="Category Image" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" src="/9.png"
+              decoding="async" data-nimg="fill" class="object-contain w-full h-auto" loading="lazy"
+              style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <section class="h-full px-4 py-8 mx-auto mt-16 mb-5 containerClasses">
+      <div>
+        <h2 class="mt-5 mb-5 text-[3rem] font-semibold text-center">Contact with us</h2>
+        <p class="text-lg text-center">If you didn't find your desire product yet, please feel free to contact us.</p>
+        <ul
+          class="grid grid-cols-5 grid-rows-2 mt-10 mb-5 lg:flex lg:justify-center lg:gap-10 gap-y-10 justify-items-center">
+          <li class="self-center"><svg height="35" width="45" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+              fill="currentColor" viewBox="0 0 308 308" xml:space="preserve"
+              class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M227.904 176.981c-.6-.288-23.054-11.345-27.044-12.781-1.629-.585-3.374-1.156-5.23-1.156-3.032 0-5.579 1.511-7.563 4.479-2.243 3.334-9.033 11.271-11.131 13.642-.274.313-.648.687-.872.687-.201 0-3.676-1.431-4.728-1.888-24.087-10.463-42.37-35.624-44.877-39.867-.358-.61-.373-.887-.376-.887.088-.323.898-1.135 1.316-1.554 1.223-1.21 2.548-2.805 3.83-4.348a140.77 140.77 0 0 1 1.812-2.153c1.86-2.164 2.688-3.844 3.648-5.79l.503-1.011c2.344-4.657.342-8.587-.305-9.856-.531-1.062-10.012-23.944-11.02-26.348-2.424-5.801-5.627-8.502-10.078-8.502-.413 0 0 0-1.732.073-2.109.089-13.594 1.601-18.672 4.802C90 87.918 80.89 98.74 80.89 117.772c0 17.129 10.87 33.302 15.537 39.453.116.155.329.47.638.922 17.873 26.102 40.154 45.446 62.741 54.469 21.745 8.686 32.042 9.69 37.896 9.69h.001c2.46 0 4.429-.193 6.166-.364l1.102-.105c7.512-.666 24.02-9.22 27.775-19.655 2.958-8.219 3.738-17.199 1.77-20.458-1.348-2.216-3.671-3.331-6.612-4.743z">
+              </path>
+              <path
+                d="M156.734 0C73.318 0 5.454 67.354 5.454 150.143c0 26.777 7.166 52.988 20.741 75.928L.212 302.716a3.998 3.998 0 0 0 4.999 5.096l79.92-25.396c21.87 11.685 46.588 17.853 71.604 17.853C240.143 300.27 308 232.923 308 150.143 308 67.354 240.143 0 156.734 0zm0 268.994c-23.539 0-46.338-6.797-65.936-19.657a3.996 3.996 0 0 0-3.406-.467l-40.035 12.726 12.924-38.129a4.002 4.002 0 0 0-.561-3.647c-14.924-20.392-22.813-44.485-22.813-69.677 0-65.543 53.754-118.867 119.826-118.867 66.064 0 119.812 53.324 119.812 118.867.001 65.535-53.746 118.851-119.811 118.851z">
+
+              </path>
+            </svg>
+          </li>
+          <li class="self-center">
+            <svg width="45" height="45" viewBox="0 0 48 48" aria-hidden="true" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg" class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M41.42 7.309s3.885-1.515 3.56 2.164c-.107 1.515-1.078 6.818-1.834 12.553l-2.59 16.99s-.216 2.489-2.159 2.922c-1.942.432-4.856-1.515-5.396-1.948-.432-.325-8.094-5.195-10.792-7.575-.756-.65-1.62-1.948.108-3.463L33.648 18.13c1.295-1.298 2.59-4.328-2.806-.649l-15.11 10.28s-1.727 1.083-4.964.109l-7.016-2.165s-2.59-1.623 1.835-3.246c10.793-5.086 24.068-10.28 35.831-15.15Z">
+
+              </path>
+            </svg>
+          </li>
+          <li class="self-center">
+            <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M11.809 7.059c-.458.008-.845.399-.837.844a.836.836 0 0 0 .859.817.82.82 0 0 0 .826-.842.826.826 0 0 0-.848-.819Zm-4.458.857c.017-.444-.367-.843-.824-.857a.832.832 0 0 0-.865.804.821.821 0 0 0 .814.853.845.845 0 0 0 .875-.8Zm8.544.755c-1.856.097-3.47.66-4.781 1.931-1.325 1.285-1.93 2.86-1.764 4.81-.726-.09-1.386-.188-2.051-.244-.23-.02-.502.008-.697.118-.645.364-1.264.775-1.997 1.234.134-.61.221-1.142.376-1.655.113-.377.06-.586-.287-.832-2.228-1.573-3.168-3.928-2.465-6.352.65-2.243 2.248-3.603 4.418-4.312 2.963-.968 6.292.02 8.093 2.371.651.85 1.05 1.803 1.155 2.931Z">
+              </path>
+              <path
+                d="M17.688 12.384a.692.692 0 0 0-.686.662.68.68 0 0 0 .677.716.675.675 0 0 0 .687-.657.687.687 0 0 0-.678-.72Zm-4.313 1.382a.693.693 0 0 0 .696-.662.696.696 0 0 0-.691-.721.704.704 0 0 0-.7.716.698.698 0 0 0 .694.667Zm6.691 6.48c-.587-.262-1.127-.655-1.7-.715-.573-.06-1.174.27-1.772.331-1.823.187-3.456-.321-4.802-1.566-2.561-2.369-2.195-6 .767-7.942 2.634-1.725 6.495-1.15 8.352 1.244 1.62 2.089 1.43 4.861-.548 6.616-.573.508-.779.926-.412 1.595.068.124.076.28.115.436Z">
+
+              </path>
+            </svg>
+          </li>
+          <li class="self-center">
+            <svg fill="currentColor" width="45" height="45" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+              class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M16 3.816C9.274 3.82 3.822 9.273 3.822 16c0 2.404.696 4.645 1.897 6.533l-.029-.049-1.172 4.999 4.999-1.172a12.065 12.065 0 0 0 6.493 1.874c6.729 0 12.184-5.455 12.184-12.184S22.739 3.817 16.01 3.817h-.011H16zM9.041 27.688l-2.012.469.319 1.368 1.481-.344a14.507 14.507 0 0 0 3.46 1.36l.103.022.337-1.363a13.505 13.505 0 0 1-3.738-1.555l.06.034zM2.48 24.642l1.368.319.469-2.012a13.285 13.285 0 0 1-1.492-3.596l-.02-.093-1.362.337a14.862 14.862 0 0 0 1.421 3.64l-.039-.076zm3.302 3.801-2.903.679.677-2.903-1.368-.321-.677 2.903a1.406 1.406 0 0 0 1.699 1.688l-.01.002 2.9-.665zm8.182-25.882c.612-.097 1.317-.152 2.036-.152s1.424.055 2.112.162l-.077-.01.214-1.39a15.07 15.07 0 0 0-4.579.011l.085-.011zM28.84 8.248l-1.205.721a13.27 13.27 0 0 1 1.538 3.669l.02.094 1.363-.337a14.937 14.937 0 0 0-1.754-4.212l.037.065zm-23.779-.31a13.732 13.732 0 0 1 2.843-2.853l.036-.026-.844-1.132a15.136 15.136 0 0 0-3.139 3.128l-.028.04zM24.06 5.059a13.732 13.732 0 0 1 2.853 2.843l.026.036 1.132-.843a15.136 15.136 0 0 0-3.128-3.139l-.04-.028zm2.879 19.004a13.746 13.746 0 0 1-2.843 2.851l-.036.026.835 1.132a15.182 15.182 0 0 0 3.148-3.128l.028-.04zm-8.903 5.377c-.612.097-1.317.152-2.036.152s-1.424-.055-2.112-.162l.077.01-.212 1.39a15.07 15.07 0 0 0 4.579-.011l-.085.011zm12.521-9.841-1.362-.337a13.553 13.553 0 0 1-1.593 3.827l.034-.059 1.205.726a14.653 14.653 0 0 0 1.695-4.053l.022-.103zM29.59 16v.009c0 .716-.055 1.419-.162 2.104l.01-.076 1.39.21c.107-.675.169-1.454.169-2.247s-.061-1.572-.18-2.331l.011.085-1.39.211c.097.61.152 1.312.152 2.028v.009zm-5.838 12.839-.722-1.205a13.27 13.27 0 0 1-3.669 1.538l-.094.02.337 1.363a14.931 14.931 0 0 0 4.213-1.754l-.065.037zM2.41 15.999v-.009c0-.716.055-1.419.162-2.104l-.01.076-1.39-.21a15.171 15.171 0 0 0 .01 4.578l-.011-.085 1.39-.211a13.176 13.176 0 0 1-.152-2.028v-.007zm.75-7.751a14.663 14.663 0 0 0-1.695 4.048l-.022.103 1.362.337A13.528 13.528 0 0 1 4.4 8.909l-.034.059zm16.439-6.806-.337 1.362c1.428.358 2.683.893 3.827 1.593l-.059-.034.726-1.205a14.653 14.653 0 0 0-4.053-1.695l-.103-.022zm-7.198 0 .337 1.362a13.553 13.553 0 0 0-3.827 1.593l.059-.034-.722-1.205a14.67 14.67 0 0 1 4.049-1.695l.103-.022z">
+
+              </path>
+            </svg>
+          </li>
+          <li class="self-center">
+            <svg width="45" height="45" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+              class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M12.743 13.455s.356.03.547-.206l.374-.47c.18-.232.614-.38 1.04-.144a11.005 11.005 0 0 1 .928.593c.282.207.86.69.862.69.276.233.34.574.152.934l-.002.008a3.896 3.896 0 0 1-.777.957l-.007.005q-.401.335-.789.381a.522.522 0 0 1-.115.008 1.05 1.05 0 0 1-.335-.052l-.009-.012c-.398-.113-1.062-.394-2.169-1.004a12.917 12.917 0 0 1-1.822-1.204 9.553 9.553 0 0 1-.82-.727l-.027-.027-.028-.028-.028-.027-.027-.028a9.553 9.553 0 0 1-.727-.82A12.93 12.93 0 0 1 7.76 10.46c-.61-1.107-.891-1.77-1.004-2.17l-.012-.008a1.05 1.05 0 0 1-.051-.335.506.506 0 0 1 .007-.115q.048-.387.382-.79l.005-.007a3.888 3.888 0 0 1 .957-.777l.007-.001c.36-.188.702-.124.934.15.002.001.484.58.69.862a11.005 11.005 0 0 1 .593.929c.237.425.089.86-.144 1.04l-.47.373c-.237.192-.206.548-.206.548s.696 2.633 3.295 3.296zm-.878-7.875a.253.253 0 0 0-.256.252.253.253 0 0 0 .252.254c1.353.01 2.454.447 3.356 1.326.894.872 1.351 2.057 1.363 3.611a.253.253 0 0 0 .254.252.253.253 0 0 0 .252-.255c-.013-1.654-.517-2.996-1.516-3.97-.99-.965-2.242-1.46-3.705-1.47Zm.463 1.313a.253.253 0 0 0-.271.234.253.253 0 0 0 .234.271c.966.071 1.682.387 2.205.957.524.573.773 1.27.754 2.141a.253.253 0 0 0 .248.258.253.253 0 0 0 .258-.246c.021-.978-.276-1.827-.887-2.494-.617-.674-1.48-1.044-2.54-1.121Zm.379 1.357a.253.253 0 0 0-.266.24.253.253 0 0 0 .239.266c.436.023.73.146.93.351.198.206.32.516.343.971a.253.253 0 0 0 .264.24.253.253 0 0 0 .24-.263c-.027-.537-.18-.984-.484-1.3-.305-.314-.743-.478-1.266-.505Zm6.636-4.3c-.497-.458-2.506-1.916-6.98-1.936 0 0-5.275-.318-7.847 2.041-1.431 1.432-1.935 3.527-1.988 6.125-.053 2.597-.122 7.465 4.57 8.785h.005L7.1 20.98s-.03.815.507.981c.65.202 1.03-.418 1.65-1.086.341-.367.811-.905 1.165-1.317 3.21.27 5.678-.347 5.958-.439.648-.21 4.315-.68 4.91-5.547.616-5.017-.297-8.19-1.947-9.621Zm.544 9.262c-.504 4.064-3.478 4.32-4.026 4.496-.233.075-2.401.614-5.127.436 0 0-2.031 2.45-2.666 3.088-.099.1-.215.14-.293.12-.11-.027-.14-.156-.138-.345l.017-3.347s-.002 0 0 0c-3.97-1.102-3.738-5.246-3.693-7.415.045-2.17.453-3.947 1.664-5.143C7.8 3.132 12.28 3.426 12.28 3.426c3.784.017 5.598 1.157 6.018 1.538 1.396 1.196 2.108 4.056 1.588 8.247z"
+                class="viber-svgrepo-com_svg__cls-1" style="stroke-width:0.0300125">
+              </path>
+            </svg>
+          </li>
+          <li class="self-center"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 130 130"
+              aria-hidden="true" fill="currentColor" class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M66.2 7.3c-4.6 1.4-11.7 8-14.1 13-1.6 3.4-2.1 6.3-2.1 13V42H35v21.9l7.3.3 7.2.3.3 29.2.2 29.3h21V64h18.8l1.2-8.3c.6-4.5 1.4-9.4 1.7-11l.6-2.7H71v-5.8c0-3.2.5-6.3 1.2-7 .8-.8 4.7-1.2 11-1.2H93V6l-11.7.1c-6.5.1-13.3.6-15.1 1.2z">
+              </path>
+            </svg>
+          </li>
+          <li class="self-center"><svg
+              class="w-[45px] h-[40px] opacity-60 hover:opacity-100 duration-300 cursor-pointer" aria-hidden="true"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84">
+              </path>
+            </svg>
+          </li>
+          <li class="self-end"><svg xmlns="http://www.w3.org/2000/svg" width="45" height="50"
+              viewBox="-100.768 -167.947 873.324 1007.682"
+              class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <g fill="currentColor">
+                <path
+                  d="M335.895 0c-91.224 0-102.663.387-138.49 2.021-35.752 1.631-60.169 7.31-81.535 15.612-22.088 8.584-40.82 20.07-59.493 38.743-18.674 18.673-30.16 37.407-38.743 59.495C9.33 137.236 3.653 161.653 2.02 197.405.386 233.232 0 244.671 0 335.895c0 91.222.386 102.661 2.02 138.488 1.633 35.752 7.31 60.169 15.614 81.534 8.584 22.088 20.07 40.82 38.743 59.495 18.674 18.673 37.405 30.159 59.493 38.743 21.366 8.302 45.783 13.98 81.535 15.612 35.827 1.634 47.266 2.021 138.49 2.021 91.222 0 102.661-.387 138.488-2.021 35.752-1.631 60.169-7.31 81.534-15.612 22.088-8.584 40.82-20.07 59.495-38.743 18.673-18.675 30.159-37.407 38.743-59.495 8.302-21.365 13.981-45.782 15.612-81.534 1.634-35.827 2.021-47.266 2.021-138.488 0-91.224-.387-102.663-2.021-138.49-1.631-35.752-7.31-60.169-15.612-81.534-8.584-22.088-20.07-40.822-38.743-59.495-18.675-18.673-37.407-30.159-59.495-38.743-21.365-8.302-45.782-13.981-81.534-15.612C438.556.387 427.117 0 335.895 0zm0 60.521c89.686 0 100.31.343 135.729 1.959 32.75 1.493 50.535 6.965 62.37 11.565 15.68 6.094 26.869 13.372 38.622 25.126 11.755 11.754 19.033 22.944 25.127 38.622 4.6 11.836 10.072 29.622 11.565 62.371 1.616 35.419 1.959 46.043 1.959 135.73 0 89.687-.343 100.311-1.959 135.73-1.493 32.75-6.965 50.535-11.565 62.37-6.094 15.68-13.372 26.869-25.127 38.622-11.753 11.755-22.943 19.033-38.621 25.127-11.836 4.6-29.622 10.072-62.371 11.565-35.413 1.616-46.036 1.959-135.73 1.959-89.694 0-100.315-.343-135.73-1.96-32.75-1.492-50.535-6.964-62.37-11.564-15.68-6.094-26.869-13.372-38.622-25.127-11.754-11.753-19.033-22.943-25.127-38.621-4.6-11.836-10.071-29.622-11.565-62.371-1.616-35.419-1.959-46.043-1.959-135.73 0-89.687.343-100.311 1.959-135.73 1.494-32.75 6.965-50.535 11.565-62.37 6.094-15.68 13.373-26.869 25.126-38.622 11.754-11.755 22.944-19.033 38.622-25.127 11.836-4.6 29.622-10.072 62.371-11.565 35.419-1.616 46.043-1.959 135.73-1.959">
+                </path>
+                <path
+                  d="M335.895 447.859c-61.838 0-111.966-50.128-111.966-111.964 0-61.838 50.128-111.966 111.966-111.966 61.836 0 111.964 50.128 111.964 111.966 0 61.836-50.128 111.964-111.964 111.964zm0-284.451c-95.263 0-172.487 77.224-172.487 172.487 0 95.261 77.224 172.485 172.487 172.485 95.261 0 172.485-77.224 172.485-172.485 0-95.263-77.224-172.487-172.485-172.487m219.608-6.815c0 22.262-18.047 40.307-40.308 40.307-22.26 0-40.307-18.045-40.307-40.307 0-22.261 18.047-40.308 40.307-40.308 22.261 0 40.308 18.047 40.308 40.308">
+                </path>
+              </g>
+            </svg>
+          </li>
+          <li class="self-end">
+            <svg xmlns="http://www.w3.org/2000/svg" height="50" width="50" viewBox="-35.2 -41.333 305.067 248"
+              class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M229.763 25.817c-2.699-10.162-10.65-18.165-20.747-20.881C190.716 0 117.333 0 117.333 0S43.951 0 25.651 4.936C15.554 7.652 7.602 15.655 4.904 25.817 0 44.237 0 82.667 0 82.667s0 38.43 4.904 56.85c2.698 10.162 10.65 18.164 20.747 20.881 18.3 4.935 91.682 4.935 91.682 4.935s73.383 0 91.683-4.935c10.097-2.717 18.048-10.72 20.747-20.88 4.904-18.422 4.904-56.851 4.904-56.851s0-38.43-4.904-56.85"
+                fill="currentColor"></path>
+              <path d="m93.333 117.558 61.334-34.89-61.334-34.893z">
+
+              </path>
+            </svg>
+          </li>
+          <li class="self-center"><svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="35" height="55"
+              viewBox="0 0 97.672 97.672" xml:space="preserve"
+              class="duration-300 cursor-pointer opacity-60 hover:opacity-100">
+              <path
+                d="M51.125 0C24.469 0 11.029 19.11 11.029 35.047c0 9.649 3.653 18.232 11.487 21.432 1.286.525 2.438.019 2.812-1.403.258-.985.871-3.468 1.144-4.503.376-1.407.229-1.9-.807-3.126-2.259-2.665-3.703-6.115-3.703-11.002 0-14.178 10.608-26.87 27.624-26.87 15.064 0 23.342 9.206 23.342 21.5 0 16.176-7.159 29.828-17.786 29.828-5.87 0-10.262-4.854-8.854-10.807 1.686-7.107 4.951-14.778 4.951-19.907 0-4.592-2.463-8.423-7.565-8.423-6 0-10.819 6.207-10.819 14.521 0 5.296 1.789 8.878 1.789 8.878s-6.141 26.015-7.215 30.571c-2.145 9.072-.322 20.195-.168 21.318.089.666.944.824 1.332.322.555-.723 7.7-9.544 10.129-18.359.687-2.496 3.944-15.42 3.944-15.42 1.95 3.717 7.647 6.992 13.706 6.992 18.034 0 30.271-16.441 30.271-38.45C86.644 15.498 72.547 0 51.125 0z">
+
+              </path>
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+
+    <div class="bg-blue-900 dark:bg-gray-800 ">
+      <div class="px-4 py-10 mx-auto text-sm text-white max-w-screen-2xl lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+          <div class="">
+            <h1 class="mb-4 font-bold uppercase text-md">Information</h1><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">About Us</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Delivery
+              Information</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Privacy
+              Policy</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Terms &amp;
+              Conditions</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Contact Us</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Returns</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">FAQ</a>
+          </div>
+          <div class="">
+            <h1 class="mb-4 font-bold uppercase text-md">My Account</h1><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Order History</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Wish List</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline"
+              href="">Newsletter</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Compare</a>
+          </div>
+          <div class="">
+            <h1 class="mb-4 font-bold uppercase text-md">Top Categories</h1><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Laptop</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Desktop</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Network</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Servers</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Apple</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Microsoft</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">PC Components</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Peripherals</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Camera</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Mobile</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Gaming &
+              VR</a>
+          </div>
+          <div class="">
+            <h1 class="mb-4 font-bold uppercase text-md">Services</h1><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Online CCIE
+              Services</a><a class="block mb-2 dark:text-gray-50 hover:underline"
+              href="">Computer Hardware Services</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Online Help Desk</a>
+          </div>
+          <div class="">
+            <h1 class="mb-4 font-bold uppercase text-md">WareHouse Live Stock</h1><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">United Arab Emirates
+              (Dubai)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">United States
+              (US)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">United Kingdom
+              (UK)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">China</a>
+          </div>
+          <div class="">
+            <h1 class="mb-4 font-bold uppercase text-md">Grow with US</h1><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="">Join as a
+              Supplier</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Join us
+              a reseller</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Join
+              as a sales member</a><a class="block mb-2 dark:text-gray-50 hover:underline"
+              href="">Join as a Network Engineer</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-xs font-light bg-white dark:bg-gray-900 dark:text-white">
+        <div class="flex items-center justify-between gap-5 px-4 py-4 mx-auto max-w-screen-2xl lg:px-8">
+          <div class="flex items-center gap-2"><span>© 2000-2023 ExcelDisc Inc. All rights reserved.</span><a
+              class="hover:underline" href="">Terms & Conditions</a><a class="hover:underline"
+              href="">Privacy Policy</a><a class="hover:underline" href="">Cookie Preferences</a>
+          </div>
+          <div class="social"></div>
+        </div>
+      </div>
+    </div>
+</body>
+<script src="java.js"></script>
+
+</html>
