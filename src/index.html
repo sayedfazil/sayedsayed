@@ -1,232 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web for test</title>
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web for test</title>
-  <link rel="stylesheet" href="/dist/output.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
-</head>
+  <body
+    x-data="setup()"
+    :class="{ 'dark': isDark }"
+    class="bg-gray-200 dark:bg-black"
+  >
+    <style>
+      .dark .dark\:divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
+        border-color: rgba(55, 65, 81);
+      }
 
-<body x-data="setup()" :class="{ 'dark': isDark }" class="bg-gray-200 dark:bg-black">
-  <style>
-    .dark .dark\:divide-gray-700> :not([hidden])~ :not([hidden]) {
-      border-color: rgba(55, 65, 81);
-    }
+      .dark .dark\:bg-gray-50 {
+        background-color: rgba(249, 250, 251);
+      }
 
-    .dark .dark\:bg-gray-50 {
-      background-color: rgba(249, 250, 251);
-    }
+      .dark .dark\:bg-gray-100 {
+        background-color: rgba(243, 244, 246);
+      }
 
-    .dark .dark\:bg-gray-100 {
-      background-color: rgba(243, 244, 246);
-    }
+      .dark .dark\:bg-gray-600 {
+        background-color: rgba(75, 85, 99);
+      }
 
-    .dark .dark\:bg-gray-600 {
-      background-color: rgba(75, 85, 99);
-    }
+      .dark .dark\:bg-gray-700 {
+        background-color: rgba(55, 65, 81);
+      }
 
-    .dark .dark\:bg-gray-700 {
-      background-color: rgba(55, 65, 81);
-    }
+      .dark .dark\:bg-gray-900 {
+        background-color: rgba(17, 24, 39);
+      }
 
-    .dark .dark\:bg-gray-900 {
-      background-color: rgba(17, 24, 39);
-    }
+      .dark .dark\:bg-black {
+        background-color: rgb(0, 0, 0);
+      }
 
-    .dark .dark\:bg-black {
-      background-color: rgb(0, 0, 0);
-    }
+      .dark .dark\:bg-red-700 {
+        background-color: rgba(185, 28, 28);
+      }
 
-    .dark .dark\:bg-red-700 {
-      background-color: rgba(185, 28, 28);
-    }
+      .dark .dark\:bg-green-700 {
+        background-color: rgba(4, 120, 87);
+      }
 
-    .dark .dark\:bg-green-700 {
-      background-color: rgba(4, 120, 87);
-    }
+      .dark .dark\:bg-indigo-800 {
+        background-color: rgb(55, 48, 163);
+      }
 
-    .dark .dark\:bg-indigo-800 {
-      background-color: rgb(55, 48, 163);
-    }
+      .dark .dark\:hover\:bg-gray-200:hover {
+        background-color: rgba(229, 231, 235);
+      }
 
-    .dark .dark\:hover\:bg-gray-200:hover {
-      background-color: rgba(229, 231, 235);
-    }
+      .dark .dark\:hover\:bg-gray-600:hover {
+        background-color: rgba(75, 85, 99);
+      }
 
-    .dark .dark\:hover\:bg-gray-600:hover {
-      background-color: rgba(75, 85, 99);
-    }
+      .dark .dark\:hover\:bg-gray-700:hover {
+        background-color: rgba(55, 65, 81);
+      }
 
-    .dark .dark\:hover\:bg-gray-700:hover {
-      background-color: rgba(55, 65, 81);
-    }
+      .dark .dark\:hover\:bg-gray-900:hover {
+        background-color: rgba(17, 24, 39);
+      }
 
-    .dark .dark\:hover\:bg-gray-900:hover {
-      background-color: rgba(17, 24, 39);
-    }
+      .dark .dark\:border-gray-100 {
+        border-color: rgba(243, 244, 246);
+      }
 
-    .dark .dark\:border-gray-100 {
-      border-color: rgba(243, 244, 246);
-    }
+      .dark .dark\:border-gray-400 {
+        border-color: rgba(156, 163, 175);
+      }
 
-    .dark .dark\:border-gray-400 {
-      border-color: rgba(156, 163, 175);
-    }
+      .dark .dark\:border-gray-500 {
+        border-color: rgba(107, 114, 128);
+      }
 
-    .dark .dark\:border-gray-500 {
-      border-color: rgba(107, 114, 128);
-    }
+      .dark .dark\:border-gray-600 {
+        border-color: rgba(75, 85, 99);
+      }
 
-    .dark .dark\:border-gray-600 {
-      border-color: rgba(75, 85, 99);
-    }
+      .dark .dark\:border-gray-700 {
+        border-color: rgba(55, 65, 81);
+      }
 
-    .dark .dark\:border-gray-700 {
-      border-color: rgba(55, 65, 81);
-    }
+      .dark .dark\:border-gray-900 {
+        border-color: rgb(0, 0, 0);
+      }
 
-    .dark .dark\:border-gray-900 {
-      border-color: rgb(0, 0, 0);
-    }
+      .dark .dark\:border-black {
+        border-color: rgb(0, 0, 0);
+      }
 
-    .dark .dark\:border-black {
-      border-color: rgb(0, 0, 0);
-    }
+      .dark .dark\:hover\:border-gray-800:hover {
+        border-color: rgba(31, 41, 55);
+      }
 
-    .dark .dark\:hover\:border-gray-800:hover {
-      border-color: rgba(31, 41, 55);
-    }
+      .dark .dark\:text-white {
+        color: rgba(255, 255, 255);
+      }
 
-    .dark .dark\:text-white {
-      color: rgba(255, 255, 255);
-    }
+      .dark .dark\:text-gray-50 {
+        color: rgba(249, 250, 251);
+      }
 
-    .dark .dark\:text-gray-50 {
-      color: rgba(249, 250, 251);
-    }
+      .dark .dark\:text-gray-100 {
+        color: rgba(243, 244, 246);
+      }
 
-    .dark .dark\:text-gray-100 {
-      color: rgba(243, 244, 246);
-    }
+      .dark .dark\:text-gray-200 {
+        color: rgba(229, 231, 235);
+      }
 
-    .dark .dark\:text-gray-200 {
-      color: rgba(229, 231, 235);
-    }
+      .dark .dark\:text-gray-400 {
+        color: rgba(156, 163, 175);
+      }
 
-    .dark .dark\:text-gray-400 {
-      color: rgba(156, 163, 175);
-    }
+      .dark .dark\:text-blue-700 {
+        color: rgb(25, 118, 210);
+      }
 
-    .dark .dark\:text-blue-700 {
-      color: rgb(25, 118, 210);
-    }
+      .dark .dark\:text-red-500 {
+        color: rgb(211, 47, 47);
+      }
 
-    .dark .dark\:text-gray-500 {
-      color: rgba(107, 114, 128);
-    }
+      .dark .dark\:text-green-700 {
+        color: rgb(56, 142, 60);
+      }
 
-    .dark .dark\:text-gray-700 {
-      color: rgba(55, 65, 81);
-    }
+      .dark .dark\:text-blue-900 {
+        color: rgb(13, 71, 161);
+      }
 
-    .dark .dark\:text-gray-800 {
-      color: rgba(31, 41, 55);
-    }
+      .dark .dark\:text-gray-500 {
+        color: rgba(107, 114, 128);
+      }
 
-    .dark .dark\:text-black {
-      color: rgb(0, 0, 0);
-    }
+      .dark .dark\:text-gray-700 {
+        color: rgba(55, 65, 81);
+      }
 
-    .dark .dark\:text-red-100 {
-      color: rgba(254, 226, 226);
-    }
+      .dark .dark\:text-gray-800 {
+        color: rgba(31, 41, 55);
+      }
 
-    .dark .dark\:text-green-100 {
-      color: rgba(209, 250, 229);
-    }
+      .dark .dark\:text-black {
+        color: rgb(0, 0, 0);
+      }
 
-    .dark .dark\:text-blue-400 {
-      color: rgba(96, 165, 250);
-    }
+      .dark .dark\:text-red-100 {
+        color: rgba(254, 226, 226);
+      }
 
-    .dark .group:hover .dark\:group-hover\:text-gray-500 {
-      color: rgba(107, 114, 128);
-    }
+      .dark .dark\:text-green-100 {
+        color: rgba(209, 250, 229);
+      }
 
-    .dark .group:focus .dark\:group-focus\:text-gray-700 {
-      color: rgba(55, 65, 81);
-    }
+      .dark .dark\:text-blue-400 {
+        color: rgba(96, 165, 250);
+      }
 
-    .dark .dark\:hover\:text-gray-100:hover {
-      color: rgba(243, 244, 246);
-    }
+      .dark .group:hover .dark\:group-hover\:text-gray-500 {
+        color: rgba(107, 114, 128);
+      }
 
-    .dark .dark\:hover\:text-blue-500:hover {
-      color: rgba(59, 130, 246);
-    }
-  </style>
-  <div
-    class="flex flex-col flex-auto flex-shrink-0 min-h-screen antialiased text-black bg-white dark:bg-black dark:text-white">
-    <div class="flex justify-between items-center h-14 bg-[#002444] dark:bg-black">
-      <div class="flex pl-4 dark:rounded-t-md">
-        <img src="/2.jpg" alt="" class="hidden w-12 h-12 rounded-full md:block">
-        <p class="hidden mt-3 ml-3 text-white md:block">Fazil</p>
-      </div>
-      <div class="flex items-center w-full max-w-xl p-2 mr-4 bg-white border border-gray-200 rounded shadow-sm">
-        <button class="outline-none focus:outline-none">
-          <svg class="w-5 h-5 text-gray-600 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-        </button>
-        <input type="search" name="" id="" placeholder="Search"
-          class="w-full text-sm text-black bg-transparent outline-none focus:outline-none" />
-      </div>
-      <ul class="flex items-center">
-        <li>
-          <button aria-hidden="true" @click="toggleTheme"
-            class="p-2 text-gray-900 transition-colors duration-200 bg-blue-200 rounded-full shadow-md group hover:bg-blue-200 dark:bg-gray-50 dark:hover:bg-gray-200 focus:outline-none">
-            <svg x-show="isDark" width="24" height="24"
-              class="text-gray-700 fill-current group-hover:text-gray-500 group-focus:text-gray-700 dark:text-gray-700 dark:group-hover:text-gray-500 dark:group-focus:text-gray-700"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-            </svg>
-            <svg x-show="!isDark" width="24" height="24"
-              class="text-gray-700 fill-current group-hover:text-gray-500 group-focus:text-gray-700 dark:text-gray-700 dark:group-hover:text-gray-500 dark:group-focus:text-gray-700"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      .dark .group:focus .dark\:group-focus\:text-gray-700 {
+        color: rgba(55, 65, 81);
+      }
+
+      .dark .dark\:hover\:text-gray-100:hover {
+        color: rgba(243, 244, 246);
+      }
+
+      .dark .dark\:hover\:text-blue-500:hover {
+        color: rgba(59, 130, 246);
+      }
+    </style>
+    <div
+      class="flex flex-col flex-auto flex-shrink-0 min-h-screen antialiased text-black bg-white dark:bg-black dark:text-white"
+    >
+      <div
+        class="flex justify-between items-center h-14 bg-[#002444] dark:bg-black"
+      >
+        <div class="flex pl-4 dark:rounded-t-md">
+          <img
+            src="/2.jpg"
+            alt=""
+            class="hidden w-12 h-12 rounded-full md:block"
+          />
+          <p class="hidden mt-3 ml-3 text-white md:block">Fazil</p>
+        </div>
+        <div
+          class="flex items-center w-full max-w-xl p-2 mr-4 bg-white border border-gray-200 rounded shadow-sm"
+        >
+          <button class="outline-none focus:outline-none">
+            <svg
+              class="w-5 h-5 text-gray-600 cursor-pointer"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </button>
-        </li>
-        <li>
-          <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>
-        </li>
-        <li>
-          <a href="#" class="flex items-center mr-8 hover:text-blue-100">
-            <span class="inline-flex mr-1">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                </path>
+          <input
+            type="search"
+            name=""
+            id=""
+            placeholder="Search"
+            class="w-full text-sm text-black bg-transparent outline-none focus:outline-none"
+          />
+        </div>
+        <ul class="flex items-center">
+          <li>
+            <button
+              aria-hidden="true"
+              @click="toggleTheme"
+              class="p-2 text-gray-900 transition-colors duration-200 bg-blue-200 rounded-full shadow-md group hover:bg-blue-200 dark:bg-gray-50 dark:hover:bg-gray-200 focus:outline-none"
+            >
+              <svg
+                x-show="isDark"
+                width="24"
+                height="24"
+                class="text-gray-700 fill-current group-hover:text-gray-500 group-focus:text-gray-700 dark:text-gray-700 dark:group-hover:text-gray-500 dark:group-focus:text-gray-700"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke=""
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                />
               </svg>
-            </span>
-            <span class="text-white">Logout</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+              <svg
+                x-show="!isDark"
+                width="24"
+                height="24"
+                class="text-gray-700 fill-current group-hover:text-gray-500 group-focus:text-gray-700 dark:text-gray-700 dark:group-hover:text-gray-500 dark:group-focus:text-gray-700"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke=""
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>
+          </li>
+          <li>
+            <a href="#" class="flex items-center mr-8 hover:text-blue-100">
+              <span class="inline-flex mr-1">
+                <svg
+                  class="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  ></path>
+                </svg>
+              </span>
+              <span class="text-white">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-
-
-    <div class="h-full bg-gray-200 dark:bg-black">
+      <div class="h-full bg-gray-200 dark:bg-black">
       <div class="pb-8 bg-white rounded-lg shadow-xl dark:bg-black">
         <div x-data="{ openSettings: false }" class="absolute right-[1%] mt-2 rounded">
           <button @click="openSettings = !openSettings"
@@ -1152,7 +1225,7 @@
             <img class="w-64 h-64 mx-auto" src="/3.png" alt="">
             <div>
               <div class="mt-6">
-                Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office
+               <a class="hover:underline" href="http://127.0.0.1:5501/src/index.html"> Canon imageRUNNER 2206 Photocopier (Print, Scan, Copy) for Office</a>
                 <p class="text-white bg-[#4f46e5] w-28 h-6 text-center mt-4 rounded-md"> Save 9.75% </p>
               </div>
 
@@ -2234,56 +2307,56 @@
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
           <div class="">
             <h1 class="mb-4 font-bold uppercase text-md">Information</h1><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">About Us</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Delivery
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">About Us</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Delivery
               Information</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Privacy
               Policy</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Terms &amp;
               Conditions</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Contact Us</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Returns</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">FAQ</a>
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Returns</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">FAQ</a>
           </div>
           <div class="">
             <h1 class="mb-4 font-bold uppercase text-md">My Account</h1><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Order History</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Wish List</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Order History</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Wish List</a><a
               class="block mb-2 dark:text-gray-50 hover:underline"
               href="">Newsletter</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Compare</a>
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Compare</a>
           </div>
           <div class="">
             <h1 class="mb-4 font-bold uppercase text-md">Top Categories</h1><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Laptop</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Desktop</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Network</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Servers</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Apple</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Microsoft</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">PC Components</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Peripherals</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Camera</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Mobile</a><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Gaming &
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Laptop</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Desktop</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Network</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Servers</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Apple</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Microsoft</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">PC Components</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Peripherals</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Camera</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Mobile</a><a
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Gaming &
               VR</a>
           </div>
           <div class="">
             <h1 class="mb-4 font-bold uppercase text-md">Services</h1><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Online CCIE
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Online CCIE
               Services</a><a class="block mb-2 dark:text-gray-50 hover:underline"
               href="">Computer Hardware Services</a><a
               class="block mb-2 dark:text-gray-50 hover:underline" href="">Online Help Desk</a>
           </div>
           <div class="">
             <h1 class="mb-4 font-bold uppercase text-md">WareHouse Live Stock</h1><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">United Arab Emirates
-              (Dubai)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">United States
-              (US)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">United Kingdom
-              (UK)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">China</a>
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">United Arab Emirates
+              (Dubai)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">United States
+              (US)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">United Kingdom
+              (UK)</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">China</a>
           </div>
           <div class="">
             <h1 class="mb-4 font-bold uppercase text-md">Grow with US</h1><a
-              class="block mb-2 dark:text-gray-50 hover:underline" href="">Join as a
-              Supplier</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Join us
-              a reseller</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="">Join
+              class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Join as a
+              Supplier</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Join us
+              a reseller</a><a class="block mb-2 dark:text-gray-50 hover:underline" href="http://127.0.0.1:5501/src/index.html">Join
               as a sales member</a><a class="block mb-2 dark:text-gray-50 hover:underline"
               href="">Join as a Network Engineer</a>
           </div>
@@ -2299,7 +2372,6 @@
         </div>
       </div>
     </div>
-</body>
-<script src="java.js"></script>
-
+  </body>
+  <script src="java.js"></script>
 </html>
