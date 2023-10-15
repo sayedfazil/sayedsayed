@@ -84,6 +84,7 @@
   border-style: none;
   outline: none;
   text-align: right;
+  margin-right: 10px;
 }
 
 #submit {
@@ -135,6 +136,7 @@
   transition-duration: 500ms;
   margin-left: auto;
   margin-right: 0;
+  cursor: default;
 }
 
 #phone:hover {
@@ -158,7 +160,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgb(38, 119, 206);
+  background-color: rgb(42, 62, 82);
   width: 100%;
   padding: 20px;
   position: absolute;
@@ -207,7 +209,7 @@
 
 #footer-2:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(38 119 206 / var(--tw-bg-opacity));
+  background-color: rgb(42, 62, 82 / var(--tw-bg-opacity));
   --tw-translate-y: -0.25rem /* -4px */;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
@@ -217,7 +219,7 @@
 
 #footer-3:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(38 119 206 / var(--tw-bg-opacity));
+  background-color: rgb(42, 62, 82 / var(--tw-bg-opacity));
   --tw-translate-y: -0.25rem /* -4px */;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
@@ -227,7 +229,7 @@
 
 #footer-4:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(38 119 206 / var(--tw-bg-opacity));
+  background-color: rgb(42, 62, 82 / var(--tw-bg-opacity));
   --tw-translate-y: -0.25rem /* -4px */;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
