@@ -161,11 +161,13 @@
   justify-content: center;
   text-align: center;
   background-color: rgb(42, 62, 82);
-  width: 100%;
   padding: 20px;
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: auto;
+  right: auto;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 #footer-2 {
