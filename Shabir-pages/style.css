@@ -153,6 +153,14 @@
   display: flex;
   margin-top: 1rem;
 }
+.main-footer {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 
 #footer {
   display: flex;
@@ -164,8 +172,6 @@
   padding: 20px;
   position: absolute;
   bottom: 0;
-  left: auto;
-  right: auto;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
 }
@@ -176,7 +182,6 @@
   transition-duration: 150ms;
   transition-duration: 500ms;
   cursor: pointer;
-  width: 100px;
   height: 30px;
   padding-top: 2px;
   --tw-bg-opacity: 1;
@@ -189,7 +194,6 @@
   transition-duration: 150ms;
   transition-duration: 500ms;
   cursor: pointer;
-  width: 150px;
   height: 30px;
   padding-top: 2px;
   --tw-bg-opacity: 1;
@@ -202,7 +206,6 @@
   transition-duration: 150ms;
   transition-duration: 500ms;
   cursor: pointer;
-  width: 150px;
   height: 30px;
   padding-top: 2px;
   --tw-bg-opacity: 1;
