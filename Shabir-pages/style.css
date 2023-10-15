@@ -16,7 +16,7 @@
 
 .container {
   font-weight: 900;
-  font-size: xx-large;
+  font-size: x-large;
   display: flex;
   text-align: center;
   align-items: center;
@@ -168,7 +168,12 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgb(42, 62, 82);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 17%,
+    rgba(20, 9, 121, 1) 43%,
+    rgba(0, 212, 255, 1) 100%
+  );
   padding: 20px;
   position: absolute;
   bottom: 0;
