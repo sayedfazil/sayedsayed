@@ -41,7 +41,7 @@ header {
 .logo {
   font-size: 27px;
   font-weight: 600;
-  color: rgb(47, 141, 70);
+  color: var(--secondary-color);
 }
 
 .icn {
@@ -279,14 +279,14 @@ header {
 .recent-Articles {
   font-size: 30px;
   font-weight: 600;
-  color: #5500cb;
+  color: var(--secondary-color);
 }
 
 .view {
   height: 35px;
   width: 90px;
   border-radius: 8px;
-  background-color: #5500cb;
+  background-color: var(--secondary-color);
   color: white;
   font-size: 15px;
   border: none;
@@ -330,6 +330,18 @@ header {
   background-color: rgb(0, 177, 0);
   color: white;
   border-radius: 4px;
+}
+
+@media screen and (max-width: 2000px) {
+  .menuicn {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 845px) {
+  .menuicn {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 950px) {
