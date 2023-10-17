@@ -52,8 +52,7 @@ header {
 }
 
 .searchbar,
-.message,
-.logosec {
+.message {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,7 +63,8 @@ header {
 }
 
 .logosec {
-  gap: 60px;
+  gap: 20px;
+  text-align: right;
 }
 
 .searchbar input {
@@ -89,7 +89,7 @@ header {
 }
 
 .message {
-  gap: 40px;
+  gap: 20px;
   position: relative;
   cursor: pointer;
 }
@@ -414,9 +414,6 @@ header {
 }
 
 @media screen and (max-width: 490px) {
-  .message {
-    display: none;
-  }
   .logosec {
     width: 100%;
     justify-content: space-between;
